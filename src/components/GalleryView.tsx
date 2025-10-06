@@ -1,12 +1,10 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { getPopularMovies, getGenres } from '../api/tmdb';
 import type { Movie } from '../types';
 import { Link } from 'react-router-dom';
 import './GalleryView.css';
-import { FavoritesContext } from '../context/FavoritesContext';
 
 export default function GalleryView(): React.JSX.Element {
-  const { toggleFavorite, isFavorite } = useContext(FavoritesContext);
   const [movies, setMovies] = useState<Movie[]>([]);
   const [genres, setGenres] = useState<{ id: number; name: string }[]>([]);
   const [selected, setSelected] = useState<number[]>([]);
@@ -66,14 +64,6 @@ export default function GalleryView(): React.JSX.Element {
               <div className="gallery-img placeholder">No Image</div>
             )}
             <div className="gallery-title">{m.title}</div>
-            <div className="card-actions" style={{ padding: '10px', textAlign: 'center' }}>
-              <button
-                className={`fav-btn ${isFavorite(m.id) ? 'active' : ''}`}
-                onClick={(e) => { e.preventDefault(); toggleFavorite(m); }}
-              >
-                {isFavorite(m.id) ? '★ Favorited' : '☆ Favorite'}
-              </button>
-            </div>
           </Link>
         ))}
       </div>

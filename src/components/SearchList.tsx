@@ -1,13 +1,11 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import useDebounced from '../hooks/useDebounced';
 import { searchMovies } from '../api/tmdb';
 import type { Movie } from '../types';
 import './SearchList.css';
-import { FavoritesContext } from '../context/FavoritesContext';
 
 export default function SearchList(): React.JSX.Element {
-  const { toggleFavorite, isFavorite } = useContext(FavoritesContext);
   const [query, setQuery] = useState('');
   const debounced = useDebounced(query, 300);
   const [movies, setMovies] = useState<Movie[]>([]);
@@ -102,15 +100,6 @@ export default function SearchList(): React.JSX.Element {
                 <div className="card-sub">{m.release_date ?? '—'}</div>
               </div>
             </Link>
-            <div className="card-actions">
-              <button
-                className={`fav-btn ${isFavorite(m.id) ? 'active' : ''}`}
-                onClick={(e) => { e.preventDefault(); toggleFavorite(m); }}
-                aria-label={isFavorite(m.id) ? 'Remove from favorites' : 'Add to favorites'}
-              >
-                {isFavorite(m.id) ? '★ Favorited' : '☆ Favorite'}
-              </button>
-            </div>
           </li>
         ))}
       </ul>

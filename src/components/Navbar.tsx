@@ -12,7 +12,6 @@ export default function Navbar(): React.JSX.Element {
         <nav className="nav-links">
           <NavLink to="/" className={({ isActive }) => (isActive ? 'active' : '')} end>Home</NavLink>
           <NavLink to="/gallery" className={({ isActive }) => (isActive ? 'active' : '')}>Gallery</NavLink>
-          <NavLink to="/favorites" className={({ isActive }) => (isActive ? 'active' : '')}>Favorites</NavLink>
         </nav>
         <button aria-label="Toggle theme" className="theme-toggle" onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}>
           {theme === 'dark' ? '☀️' : '🌙'}

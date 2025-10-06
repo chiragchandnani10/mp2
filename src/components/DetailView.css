@@ -52,7 +52,6 @@
   cursor: pointer;
   box-shadow: 0 10px 24px var(--ring);
 }
-.nav-btn.active { filter: saturate(120%); box-shadow: 0 12px 30px var(--ring); }
 .center-message { text-align: center; color: var(--muted); margin-top: 20px; }
 .error-message { color: #b91c1c; text-align: center; margin-top: 12px; }
   
