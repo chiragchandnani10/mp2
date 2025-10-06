@@ -42,6 +42,17 @@ export default function GalleryView(): React.JSX.Element {
 
   const filtered = selected.length ? movies.filter((mv) => (mv.genre_ids || []).some((id) => selected.includes(id))) : movies;
 
+  // Keep navigation order in sync with current filtered list
+  useEffect(() => {
+    try {
+      if (filtered.length) {
+        sessionStorage.setItem('lastResults', JSON.stringify(filtered.map((m) => m.id)));
+      } else {
+        sessionStorage.removeItem('lastResults');
+      }
+    } catch (e) {}
+  }, [filtered]);
+
   return (
     <div className="page-wrap">
       <h2 className="page-title">Popular Movies</h2>

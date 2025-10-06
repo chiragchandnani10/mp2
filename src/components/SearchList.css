@@ -81,10 +81,9 @@
   .card-body {
     padding: 12px;
   }
-  .card-title {
-    font-weight: 700;
-    color: #fff;
-  }
+  .card-title { font-weight: 700; color: #fff; }
+  .card-title-row { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+  .rating-badge { background: #0b1116; color: #ffd166; border: 1px solid rgba(255,255,255,0.08); padding: 4px 8px; border-radius: 999px; font-weight: 700; font-size: 12px; }
   .card-sub {
     color: #9aa6b2;
     font-size: 13px;

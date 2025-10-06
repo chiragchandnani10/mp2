@@ -57,6 +57,17 @@ export default function SearchList(): React.JSX.Element {
     return order === 'asc' ? va.localeCompare(vb) : vb.localeCompare(va);
   });
 
+  // Keep navigation order in sync with current visible list
+  useEffect(() => {
+    try {
+      if (sorted.length) {
+        sessionStorage.setItem('lastResults', JSON.stringify(sorted.map((m) => m.id)));
+      } else {
+        sessionStorage.removeItem('lastResults');
+      }
+    } catch (e) {}
+  }, [sorted]);
+
   return (
     <div className="page-wrap">
       <div className="search-header">
@@ -96,7 +107,12 @@ export default function SearchList(): React.JSX.Element {
                 <div className="poster placeholder">No Image</div>
               )}
               <div className="card-body">
-                <div className="card-title">{m.title}</div>
+                <div className="card-title-row">
+                  <div className="card-title">{m.title}</div>
+                  <span className="rating-badge" aria-label="Rating">
+                    {typeof m.vote_average === 'number' ? m.vote_average.toFixed(1) : '—'}
+                  </span>
+                </div>
                 <div className="card-sub">{m.release_date ?? '—'}</div>
               </div>
             </Link>
