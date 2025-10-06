@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { getMovieDetails } from '../api/tmdb';
 import './DetailView.css';
+import { FavoritesContext } from '../context/FavoritesContext';
 
 export default function DetailView(): React.JSX.Element {
+  const { toggleFavorite, isFavorite } = useContext(FavoritesContext);
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const [movie, setMovie] = useState<any | null>(null);
@@ -86,6 +88,12 @@ export default function DetailView(): React.JSX.Element {
           <div className="nav-buttons">
             <button className="nav-btn" onClick={() => goRelative(-1)}>◀ Prev</button>
             <button className="nav-btn" onClick={() => goRelative(1)}>Next ▶</button>
+            <button
+              className={`nav-btn ${isFavorite(movie.id) ? 'active' : ''}`}
+              onClick={() => toggleFavorite({ id: movie.id, title: movie.title, poster_path: movie.poster_path, release_date: movie.release_date })}
+            >
+              {isFavorite(movie.id) ? '★ Favorited' : '☆ Favorite'}
+            </button>
           </div>
         </div>
       </div>

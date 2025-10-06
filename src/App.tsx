@@ -1,6 +1,7 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
+import Footer from './components/Footer';
 import SearchList from './components/SearchList';
 import GalleryView from './components/GalleryView';
 import DetailView from './components/DetailView';
@@ -22,6 +23,7 @@ export default function App(): React.JSX.Element {
           </Routes>
         </ErrorBoundary>
       </main>
+      <Footer />
     </div>
   );
 }
